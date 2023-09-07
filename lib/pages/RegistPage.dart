@@ -1,34 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:register_page_flutter/controller/user_controller.dart';
+import 'package:register_page_flutter/controller/RegistController/Regist_controller.dart';
 
 class RegisterPage extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
 
-  final UserController userController = Get.find<UserController>(); // Gunakan controller
 
-  void onSubmit() {
-    final username = usernameController.text;
-    final name = nameController.text;
-    final email = emailController.text;
-    final phone = phoneController.text;
-    final address = addressController.text;
+  final RegistController registController = Get.put(RegistController());
+  final _formKey = GlobalKey<FormState>();
 
-    userController.setUserDetails(
-      username: username,
-      name: name,
-      email: email,
-      phone: phone,
-      address: address,
-    );
 
-    Get.toNamed('/photo_upload');
-  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,74 +19,95 @@ class RegisterPage extends StatelessWidget {
       appBar: AppBar(title: Text('Register')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(25.0),
-        child: Column(
+        child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          child: Column(
           children: [
             SizedBox(height: 30),
             Text(
               'Create Your Account',
               style: TextStyle(
-                fontSize: 24, // Sesuaikan ukuran teks dengan preferensi Anda
-                fontWeight: FontWeight.bold, // Sesuaikan gaya teks dengan preferensi Anda
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Text(
               'please enter info to create account',
               style: TextStyle(
-                fontSize: 15, // Sesuaikan ukuran teks dengan preferensi Anda
-                fontWeight: FontWeight.normal, // Sesuaikan gaya teks dengan preferensi Anda
+                fontSize: 15,
+                fontWeight: FontWeight.normal,
               ),
             ),
-            SizedBox(height: 20), // Jarak antara input
-            TextField(
-              controller: usernameController,
+            SizedBox(height: 20),
+            TextFormField(
+              controller: registController.usernameController,
+              keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: 'Username',
-                icon: Icon(CupertinoIcons.person),
+                prefixIcon: Icon(Icons.person),
+                  border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10), // Jarak antara input
-            TextField(
-              controller: nameController,
+            SizedBox(height: 10),
+            TextFormField(
+              controller: registController.nameController,
+              keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: 'Name',
-                icon: Icon(CupertinoIcons.person),
+                prefixIcon: Icon(Icons.person),
+                border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10), // Jarak antara input
-            TextField(
-              controller: emailController,
+            SizedBox(height: 10),
+            TextFormField(
+              controller: registController.emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Email',
-                icon: Icon(CupertinoIcons.mail),
+                prefixIcon: Icon(Icons.mail),
+                border: OutlineInputBorder(),
               ),
+              validator: registController.validateEmail,
             ),
-            SizedBox(height: 10), // Jarak antara input
-            TextField(
-              controller: phoneController,
+            SizedBox(height: 10),
+            TextFormField(
+              controller: registController.phoneController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Phone Number',
-                icon: Icon(CupertinoIcons.phone),
+                prefixIcon: Icon(Icons.phone),
+                border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 10), // Jarak antara input
-            TextField(
-              controller: addressController,
+            SizedBox(height: 10),
+            TextFormField(
+              controller: registController.addressController,
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 labelText: 'Address',
-                icon: Icon(CupertinoIcons.location),
+                prefixIcon: Icon(Icons.location_on),
+                border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20), // Jarak antara input dan tombol
+            SizedBox(height: 20),
             SizedBox(
-              width: double.infinity, // Tombol mengambil lebar penuh parent
+              width: double.infinity,
               child: ElevatedButton(
-                onPressed: onSubmit,
+                onPressed: () => registController.onSubmit(),
                 child: Text('Submit'),
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
               ),
-            ),
-
+            )
           ],
         ),
+      ),
       ),
     );
   }

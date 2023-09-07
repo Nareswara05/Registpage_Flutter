@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:register_page_flutter/controller/RegistController/Regist_controller.dart';
 import 'package:register_page_flutter/controller/user_controller.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:register_page_flutter/controller/ProfileController/Profile_controller.dart';
 
 class ProfilePage extends StatelessWidget {
+  final ProfileController profileController = Get.find<ProfileController>();
   final UserController userController = Get.find<UserController>();
-  final File? imageFile; // Terima file gambar dari PhotoUploadPage
+  final RegistController registController = Get.find<RegistController>();
+  final File? imageFile;
 
   ProfilePage({Key? key, this.imageFile}) : super(key: key);
 
@@ -48,11 +51,21 @@ class ProfilePage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               // Informasi Profil dengan Border
-              buildProfileInfo('Username', userController.username.value, verticalPadding: 20.0),
-              buildProfileInfo('Name', userController.name.value, verticalPadding: 20.0),
-              buildProfileInfo('Email', userController.email.value, verticalPadding: 20.0),
-              buildProfileInfo('Phone', userController.phone.value, verticalPadding: 20.0),
-              buildProfileInfo('Address', userController.address.value, verticalPadding: 20.0),
+              profileController.buildProfileInfo('Username',
+                  registController.usernameController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(
+                  'Name', registController.nameController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(
+                  'Email', registController.emailController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(
+                  'Phone', registController.phoneController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo('Address',
+                  registController.usernameController.text.toString(),
+                  verticalPadding: 20.0),
             ],
           ),
         ),
@@ -61,40 +74,4 @@ class ProfilePage extends StatelessWidget {
   }
 
   // Fungsi untuk membangun informasi profil dengan border
-  Widget buildProfileInfo(String title, String value, {double verticalPadding = 10.0, double containerWidth = 350.0}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10), // Margin kiri kanan 10
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5), // Padding vertikal dan horizontal
-      width: containerWidth, // Lebar Container
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey, // Warna border
-          width: 1.0, // Lebar border (bisa diganti sesuai kebutuhan)
-        ),
-        borderRadius: BorderRadius.circular(10), // Sudut border
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 5),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-
 }
-
