@@ -2,40 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_page_flutter/controller/user_controller.dart';
 
-
 class ProfileController extends GetxController {
   final UserController userController = Get.find<UserController>();
 
-  Widget buildProfileInfo(String title, String value,
-      {double verticalPadding = 10.0, double containerWidth = 350.0}) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      width: containerWidth,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.grey,
-          width: 1.0,
-        ),
-        borderRadius: BorderRadius.circular(10),
-      ),
+  Widget buildProfileInfo(IconData icon, String value, {double verticalPadding = 10.0}) {
+    return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 20.0,
+                  color: Colors.black,
+                ),
+                SizedBox(width: 20.0),
+                Expanded(
+                  child: Text(
+                    value,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(height: 5),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16.0,
-            ),
-          ),
+          SizedBox(height: verticalPadding),
         ],
       ),
     );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:register_page_flutter/controller/RegistController/Regist_controller.dart';
-
-
 class PhotoUploadPage extends StatefulWidget {
   @override
   _PhotoUploadPageState createState() => _PhotoUploadPageState();
@@ -19,6 +18,8 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
+
             Obx(() => registController.selectedImageFile != null
                 ? ClipOval(
               child: Image.file(
@@ -36,12 +37,19 @@ class _PhotoUploadPageState extends State<PhotoUploadPage> {
                 color: Colors.grey,
               ),
             ),),
-
-            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: ()=> registController.pickImage(),
-              child: Text('Select Image'),
+              onPressed: () => registController.pickImage(),
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder(), backgroundColor: Colors.blue,
+                padding: EdgeInsets.all(10.0),
+              ),
+              child: Icon(
+                CupertinoIcons.plus,
+                size: 32.0,
+                color: Colors.white,
+              ),
             ),
+            SizedBox(height: 40),
             ElevatedButton(
               onPressed: ()=>registController.onRegister(),
               child: Text('Register'),

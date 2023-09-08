@@ -45,8 +45,12 @@ class RegisterPage extends StatelessWidget {
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: 'Username',
+                hintText: 'Josee',
                 prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(),
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  )
               ),
             ),
             SizedBox(height: 10),
@@ -55,8 +59,12 @@ class RegisterPage extends StatelessWidget {
               keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: 'Name',
+                hintText: 'Jose Regio',
                 prefixIcon: Icon(Icons.person),
                 border: OutlineInputBorder(),
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  )
               ),
             ),
             SizedBox(height: 10),
@@ -65,8 +73,13 @@ class RegisterPage extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Email',
+                hintText: 'example@gmail.com',
                 prefixIcon: Icon(Icons.mail),
                 border: OutlineInputBorder(),
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  )
+
               ),
               validator: registController.validateEmail,
             ),
@@ -75,9 +88,13 @@ class RegisterPage extends StatelessWidget {
               controller: registController.phoneController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
+                hintText: '08*******',
                 labelText: 'Phone Number',
                 prefixIcon: Icon(Icons.phone),
                 border: OutlineInputBorder(),
+                hintStyle: TextStyle(
+                  color: Colors.grey
+                )
               ),
             ),
             SizedBox(height: 10),
@@ -85,9 +102,13 @@ class RegisterPage extends StatelessWidget {
               controller: registController.addressController,
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
+                hintText: 'Jakarta, Indonesia',
                 labelText: 'Address',
                 prefixIcon: Icon(Icons.location_on),
                 border: OutlineInputBorder(),
+                  hintStyle: TextStyle(
+                      color: Colors.grey
+                  )
               ),
             ),
             SizedBox(height: 20),

@@ -28,15 +28,14 @@ class ProfilePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Background Container
               Container(
-                width: double.infinity, // 100% lebar perangkat
-                color: Colors.blue, // Warna latar belakang
+                width: double.infinity,
+                color: Colors.blue,
                 child: Column(
                   children: [
                     SizedBox(height: 20),
-                    // Foto Profil di Bawah Background
                     if (imageFile != null)
                       ClipOval(
                         child: Image.file(
@@ -46,32 +45,45 @@ class ProfilePage extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                       ),
+                    SizedBox(height: 10),
                   ],
                 ),
               ),
+              Container(
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 10.0),
+                    Text(
+                      registController.usernameController.text.toString(),
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20,),
+
+              profileController.buildProfileInfo(
+                  Icons.person, registController.nameController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(
+                  Icons.mail, registController.emailController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(
+                  Icons.phone, registController.phoneController.text.toString(),
+                  verticalPadding: 20.0),
+              profileController.buildProfileInfo(Icons.location_city,
+                  registController.usernameController.text.toString(),
+                  verticalPadding: 20.0),
               SizedBox(height: 20),
-              // Informasi Profil dengan Border
-              profileController.buildProfileInfo('Username',
-                  registController.usernameController.text.toString(),
-                  verticalPadding: 20.0),
-              profileController.buildProfileInfo(
-                  'Name', registController.nameController.text.toString(),
-                  verticalPadding: 20.0),
-              profileController.buildProfileInfo(
-                  'Email', registController.emailController.text.toString(),
-                  verticalPadding: 20.0),
-              profileController.buildProfileInfo(
-                  'Phone', registController.phoneController.text.toString(),
-                  verticalPadding: 20.0),
-              profileController.buildProfileInfo('Address',
-                  registController.usernameController.text.toString(),
-                  verticalPadding: 20.0),
             ],
           ),
         ),
       ),
     );
   }
-
-  // Fungsi untuk membangun informasi profil dengan border
 }
